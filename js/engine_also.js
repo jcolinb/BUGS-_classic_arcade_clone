@@ -24,6 +24,7 @@ var Engine = (function(global) {
     }
 
     function init() {
+        var player;
         reset();
         lastTime = Date.now();
         main();
@@ -86,7 +87,7 @@ var Engine = (function(global) {
     }
 
     function reset() {
-
+      player = new Player();
     }
 
     Resources.load([
