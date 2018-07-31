@@ -31,8 +31,15 @@ var Engine = (function(global) {
     }
 
     function update(dt) {
+        hordeCheck();
         updateEntities(dt);
         checkCollisions();
+    }
+
+    function hordeCheck() {
+        if (allEnemies.length < 3) {
+            allEnemies.push(new Enemy());
+        }
     }
 
     function updateEntities(dt) {
