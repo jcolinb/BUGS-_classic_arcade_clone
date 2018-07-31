@@ -25,7 +25,8 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.chooseLane = function () {
-    return Math.floor(Math.random() * (6-3) + 3);
+    return lane = Math.floor((Math.random() * (6-3) + 3) * 83);
+    }
 };
 
 // Now write your own player class
