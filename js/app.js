@@ -25,7 +25,7 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.chooseLane = function () {
-    return Math.floor(((Math.random() * (5-2)) + 2) * 101);
+    return (Math.floor((Math.random() * 3) + 1) * 83)-20;
 };
 
 Enemy.prototype.chooseSpeed = function () {
@@ -36,10 +36,10 @@ Enemy.prototype.chooseSpeed = function () {
 // This class requires an update(), render() and
 // a handleInput() method.
 const Player = function () {
-    this.sprite = 'char-cat-girl.png';
+    this.sprite = 'images/char-boy.png';
     this.x = 202;
-    this.y = 505;
-    this.nextMove;
+    this.y = 404;
+    this.nextMove = [202,404];
 };
 
 Player.prototype.update = function () {
@@ -51,18 +51,20 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function (move) {
+    console.log(move);
     switch (move) {
         case 'left':
             this.nextMove = [(this.x-101),this.y];
+            console.log(this.nextMove);
             break;
         case 'up':
-            this.nextMove = [this.x,(this.y-101)];
+            this.nextMove = [this.x,(this.y-83)];
             break;
         case 'right':
             this.nextMove = [(this.x+101),this.y];
             break;
         case 'down':
-            this.nextMove = [this.x,(this.y+101)];
+            this.nextMove = [this.x,(this.y+83)];
             break;
         default:
             this.nextMove = [this.x,this.y];
@@ -72,7 +74,6 @@ Player.prototype.handleInput = function (move) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 const allEnemies = [];
-const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

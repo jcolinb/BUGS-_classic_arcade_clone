@@ -24,7 +24,7 @@ var Engine = (function(global) {
     }
 
     function init() {
-        var player;
+        let player;
         reset();
         lastTime = Date.now();
         main();
@@ -46,6 +46,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
+        player.update();
     }
 
     function checkCollisions() {
