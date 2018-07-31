@@ -39,6 +39,15 @@ const Player = function () {
     this.sprite = 'char-cat-girl.png';
     this.x = 202;
     this.y = 505;
+    this.nextMove;
+};
+
+Player.prototype.update = function () {
+    [this.x,this.y] = this.nextMove;
+};
+
+Player.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Now instantiate your objects.
