@@ -95,6 +95,7 @@ var Engine = (function(global) {
 
     function reset() {
       player = new Player();
+      console.log('reset!');
     }
 
     Resources.load([

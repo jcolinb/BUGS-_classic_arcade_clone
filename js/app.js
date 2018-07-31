@@ -54,21 +54,26 @@ Player.prototype.handleInput = function (move) {
     console.log(move);
     switch (move) {
         case 'left':
-            if (x !> 0) {
+            if (!(this.x <= 0)) {
               this.nextMove = [(this.x-101),this.y];
             }
             break;
         case 'up':
-            this.nextMove = [this.x,(this.y-83)];
+            if (!(this.y < 73)) {
+              this.nextMove = [this.x,(this.y-83)];
+            }
+            else {
+              player = new Player();
+            }
             break;
         case 'right':
-            if ( x !> 404) {
+            if (!(this.x >= 404)) {
               this.nextMove = [(this.x+101),this.y];
             }
             break;
         case 'down':
-            if (y !< 404)
-            this.nextMove = [this.x,(this.y+83)];
+            if (!(this.y >= 404))
+              this.nextMove = [this.x,(this.y+83)];
             break;
         default:
             this.nextMove = [this.x,this.y];
