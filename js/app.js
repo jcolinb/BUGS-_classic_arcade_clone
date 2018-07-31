@@ -16,7 +16,12 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    if (this.x > 505) {
+        allEnemies.splice((allEnemies.indexOf(this)),1);
+    }
+    else {
     this.x = this.x + (dt * this.speed * 100);
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -51,7 +56,6 @@ Player.prototype.render = function() {
 };
 
 Player.prototype.handleInput = function (move) {
-    console.log(move);
     switch (move) {
         case 'left':
             if (!(this.x <= 0)) {
