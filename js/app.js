@@ -5,7 +5,7 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 0;
+    this.x = -101;
     this.y = this.chooseLane();
     this.speed = this.chooseSpeed();
 };
@@ -25,16 +25,21 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.chooseLane = function () {
-    return Math.floor((Math.random() * (5-2) + 2) * 83);
+    return Math.floor(((Math.random() * (5-2)) + 2) * 101);
 };
 
 Enemy.prototype.chooseSpeed = function () {
-    return Math.floor(Math.random() * (4-1) + 1);
+    return Math.floor((Math.random() * (4-1)) + 1);
 };
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-
+const Player = function () {
+    this.sprite = 'char-cat-girl.png';
+    this.x = 202;
+    this.y = 505;
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
