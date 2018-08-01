@@ -51,8 +51,6 @@ var Engine = (function(global) {
 
     function checkCollisions() {
 
-            }
-        }
     }
 
     function render() {
