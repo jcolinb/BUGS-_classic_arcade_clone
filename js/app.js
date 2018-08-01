@@ -8,6 +8,7 @@ var Enemy = function() {
     this.x = -101;
     this.y = this.chooseLane();
     this.speed = this.chooseSpeed();
+    this.col = [];
 };
 
 // Update the enemy's position, required method for game
@@ -21,6 +22,8 @@ Enemy.prototype.update = function(dt) {
     }
     else {
     this.x = this.x + (dt * this.speed * 100);
+    this.col[0] = Math.floor(this.x/101);
+    this.col[1] = Math.floor((this.x+100)/101);
     }
 };
 
@@ -30,7 +33,8 @@ Enemy.prototype.render = function() {
 };
 
 Enemy.prototype.chooseLane = function () {
-    return (Math.floor((Math.random() * 3) + 1) * 83)-20;
+    this.row = Math.floor((Math.random() * 3) + 1);
+    return (this.row * 83)-20;
 };
 
 Enemy.prototype.chooseSpeed = function () {
