@@ -22,8 +22,8 @@ Enemy.prototype.update = function(dt) {
     }
     else {
     this.x = this.x + (dt * this.speed * 100);
-    this.col[0] = Math.floor((this.x/101));
-    this.col[1] = Math.floor(((this.x+100)/101));
+    this.col[0] = Math.floor(((this.x+30)/101));
+    this.col[1] = Math.floor(((this.x+70)/101));
     }
 };
 
