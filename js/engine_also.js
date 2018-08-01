@@ -33,7 +33,6 @@ var Engine = (function(global) {
     function update(dt) {
         hordeCheck();
         updateEntities(dt);
-        checkCollisions();
     }
 
     function hordeCheck() {
@@ -43,15 +42,15 @@ var Engine = (function(global) {
     }
 
     function updateEntities(dt) {
+        player.update();        
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
+            if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
+              player = new Player();
+            }
         });
-        player.update();
     }
 
-    function checkCollisions() {
-
-    }
 
     function render() {
 
