@@ -50,9 +50,7 @@ var Engine = (function(global) {
     }
 
     function checkCollisions() {
-        for (e of allEnemies) {
-            if ([this.x,this.y] == [player.x,player.y]) {
-                reset();
+
             }
         }
     }

@@ -40,11 +40,14 @@ Enemy.prototype.chooseSpeed = function () {
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
+
 const Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 202;
     this.y = 404;
     this.nextMove = [202,404];
+    this.row = 5;
+    this.col = 2;
 };
 
 Player.prototype.update = function () {
@@ -60,11 +63,13 @@ Player.prototype.handleInput = function (move) {
         case 'left':
             if (!(this.x <= 0)) {
               this.nextMove = [(this.x-101),this.y];
+              this.col -= 1;
             }
             break;
         case 'up':
             if (!(this.y < 73)) {
               this.nextMove = [this.x,(this.y-83)];
+              this.row -= 1;
             }
             else {
               player = new Player();
@@ -73,11 +78,14 @@ Player.prototype.handleInput = function (move) {
         case 'right':
             if (!(this.x >= 404)) {
               this.nextMove = [(this.x+101),this.y];
+              this.col += 1;
             }
             break;
         case 'down':
-            if (!(this.y >= 404))
+            if (!(this.y >= 404)) {
               this.nextMove = [this.x,(this.y+83)];
+              this.row += 1;
+            }
             break;
         default:
             this.nextMove = [this.x,this.y];
