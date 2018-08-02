@@ -46,7 +46,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
             if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
-              player = new Player();
+              win.setTimeout(reset,75);
             }
         });
     }
