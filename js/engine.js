@@ -72,8 +72,6 @@ var Engine = (function(global) {
    */
   
   function init() {
-    let player;
-    reset();
     lastTime = Date.now();
     main();
   }
@@ -194,7 +192,6 @@ var Engine = (function(global) {
   
   function reset() {
     player = new Player();
-    console.log('reset!');
   }
   
   /* Go ahead and load all of the images we know we're going to need to

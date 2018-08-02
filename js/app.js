@@ -59,6 +59,7 @@ const Player = function () {
   this.nextMove = [202,404];
   this.row = 5;
   this.col = 2;
+  this.win = false;
 };
 
 // update player position
@@ -73,39 +74,42 @@ Player.prototype.render = function() {
 
 // update player.nextMove based on key input
 Player.prototype.handleInput = function (move) {
-  switch (move) {
-  case 'left':
-    if (!(this.x <= 0)) {
-      this.nextMove = [(this.x-101),this.y];
-      this.col -= 1;
+  if (!(this.win)) {
+    switch (move) {
+    case 'left':
+      if (!(this.x <= 0)) {
+        this.nextMove = [(this.x-101),this.y];
+        this.col -= 1;
+      }
+      break;
+    case 'up':
+      if (!(this.y < 73)) {
+        this.nextMove = [this.x,(this.y-83)];
+        this.row -= 1;
+      }
+      else { // win condition; if player reaches top, make sprite a princess, then reset game after a pause
+        this.win = true;
+        this.nextMove = [this.x,-11];
+        this.row -= 1;
+        this.sprite = 'images/char-princess-girl.png';
+        setTimeout(reset,2000);
+      }
+      break;
+    case 'right':
+      if (!(this.x >= 404)) {
+        this.nextMove = [(this.x+101),this.y];
+        this.col += 1;
+      }
+      break;
+    case 'down':
+      if (!(this.y >= 404)) {
+        this.nextMove = [this.x,(this.y+83)];
+        this.row += 1;
+      }
+      break;
+    default:
+      this.nextMove = [this.x,this.y];
     }
-    break;
-  case 'up':
-    if (!(this.y < 73)) {
-      this.nextMove = [this.x,(this.y-83)];
-      this.row -= 1;
-    }
-    else { // win condition; if player reaches top, make sprite a princess, then reset game after a pause
-      this.nextMove = [this.x,-11];
-      this.row -= 1;
-      this.sprite = 'images/char-princess-girl.png';
-      setTimeout(reset,2000);
-    }
-    break;
-  case 'right':
-    if (!(this.x >= 404)) {
-      this.nextMove = [(this.x+101),this.y];
-      this.col += 1;
-    }
-    break;
-  case 'down':
-    if (!(this.y >= 404)) {
-      this.nextMove = [this.x,(this.y+83)];
-      this.row += 1;
-    }
-    break;
-  default:
-    this.nextMove = [this.x,this.y];
   }
 };
 // Now instantiate your objects.
@@ -113,10 +117,9 @@ Player.prototype.handleInput = function (move) {
 // Place the player object in a variable called player
 const allEnemies = [];
 var player = new Player();
-
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-function mover (e) {
+function mover (e,b=true) {
   var allowedKeys = {
     37: 'left',
     38: 'up',
@@ -124,7 +127,9 @@ function mover (e) {
     40: 'down'
   };
   player.handleInput(allowedKeys[e.keyCode]);
-  setTimeout(listen,150); // issue new promise to listen for next key press after pause for animation
+  if (b) {
+    setTimeout(listen,150); // issue new promise to listen for next key press after pause for animation
+  }
 }
 
 // promise-ize event listener to control speed of key input
