@@ -22,6 +22,8 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 505) {
         allEnemies.splice((allEnemies.indexOf(this)),1);
     }
+
+    // else update enemy position by one frame
     else {
     this.x = this.x + (dt * this.speed * 100);
     this.col[0] = Math.floor(((this.x+30)/101));
@@ -64,7 +66,7 @@ Player.prototype.update = function () {
     [this.x,this.y] = this.nextMove;
 };
 
-// Draw player sprite
+// draw player sprite
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
@@ -84,7 +86,7 @@ Player.prototype.handleInput = function (move) {
               this.row -= 1;
             }
             else {
-              player = new Player();
+              reset();
             }
             break;
         case 'right':
@@ -107,16 +109,25 @@ Player.prototype.handleInput = function (move) {
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 const allEnemies = [];
+var player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+function mover (e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
         40: 'down'
     };
-
     player.handleInput(allowedKeys[e.keyCode]);
-});
+    setTimeout(listen,150); // issue new promise to listen for next key press after pause for animation
+}
+
+// promise-ize event listener to control speed of key input
+function listen () {
+let p = new Promise(function (res) {document.addEventListener('keyup',res);});
+p.then(mover);
+}
+
+listen();

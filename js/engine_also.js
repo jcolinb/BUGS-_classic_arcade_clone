@@ -46,7 +46,8 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
             if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
-              win.setTimeout(reset,75);
+              player.sprite = 'images/deadboy.png';
+              win.setTimeout(reset,150);
             }
         });
     }
@@ -98,9 +99,11 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/deadboy.png'
     ]);
     Resources.onReady(init);
 
     global.ctx = ctx;
+    global.reset = reset;
 })(this);
