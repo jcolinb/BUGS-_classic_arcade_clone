@@ -17,6 +17,8 @@ Enemy.prototype.update = function(dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    // remove enemy from allEnemies if it has fully traversed screen
     if (this.x > 505) {
         allEnemies.splice((allEnemies.indexOf(this)),1);
     }
@@ -32,11 +34,13 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Choose allowed row for enemy to traverse
 Enemy.prototype.chooseLane = function () {
     this.row = Math.floor((Math.random() * 3) + 1);
     return (this.row * 83)-20;
 };
 
+// Choose speed of enemy
 Enemy.prototype.chooseSpeed = function () {
     return Math.floor((Math.random() * (4-1)) + 1);
 };
@@ -45,6 +49,7 @@ Enemy.prototype.chooseSpeed = function () {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+// Player constructor
 const Player = function () {
     this.sprite = 'images/char-boy.png';
     this.x = 202;
@@ -54,14 +59,17 @@ const Player = function () {
     this.col = 2;
 };
 
+// update player position
 Player.prototype.update = function () {
     [this.x,this.y] = this.nextMove;
 };
 
+// Draw player sprite
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// update player.nextMove based on key input
 Player.prototype.handleInput = function (move) {
     switch (move) {
         case 'left':
