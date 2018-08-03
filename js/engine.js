@@ -121,6 +121,7 @@ var Engine = (function(global) {
       // check for collisions each update; if player collides with enemy, draw deadboy sprite and reset
       if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
         if ((enemy.isGem)) {
+          allEnemies.splice((allEnemies.indexOf(enemy)),1);
           player.winnable = true;
         }
         else {
