@@ -94,7 +94,12 @@ var Engine = (function(global) {
   // if there are less than 3 enemies in allEnemies, add 1
   function hordeCheck() {
     if (allEnemies.length < 3) {
-      allEnemies.push(new Enemy());
+      if ((Math.floor((Math.random() * 3)) % 2) == 0) {
+        allEnemies.push(new Gem());
+      }
+      else {
+        allEnemies.push(new Enemy());
+      }
     }
   }
   
@@ -132,7 +137,7 @@ var Engine = (function(global) {
      */
     
     var rowImages = [
-      'images/water-block.png',   // Top row is water
+      'images/Rock.png',   // Top row is water
       'images/stone-block.png',   // Row 1 of 3 of stone
       'images/stone-block.png',   // Row 2 of 3 of stone
       'images/stone-block.png',   // Row 3 of 3 of stone
@@ -206,7 +211,9 @@ var Engine = (function(global) {
     'images/enemy-bug.png',
     'images/char-boy.png',
     'images/deadboy.png',
-    'images/char-princess-girl.png'
+    'images/char-princess-girl.png',
+    'images/Rock.png',
+    'images/Gem_Blue.png'
   ]);
   Resources.onReady(init);
   

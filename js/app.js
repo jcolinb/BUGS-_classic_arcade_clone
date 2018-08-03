@@ -47,6 +47,18 @@ Enemy.prototype.chooseSpeed = function () {
   return Math.floor((Math.random() * (4-1)) + 1);
 };
 
+// Gem constructor; acts like an enemy, but unlocks the win
+const Gem = function () {
+  this.sprite = 'images/Gem_Blue.png';
+  this.x = -101;
+  this.y = this.chooseLane();
+  this.speed = this.chooseSpeed();
+  this.col = [];
+  this.isGem = true;
+};
+
+Gem.prototype = Enemy.prototype;
+
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
