@@ -46,7 +46,7 @@ var Engine = (function(global) {
     var now = Date.now(),
         dt = (now - lastTime) / 1000.0;
     
-    /* Call our update/render functions, pass along the time delta to
+    /* Call our update function, pass along the time delta to
      * our update function since it may be used for smooth animation.
      */
     
@@ -83,19 +83,21 @@ var Engine = (function(global) {
    * the need to add an additional function call here. For now, we've left
    * it commented out - you may or may not want to implement this
    * functionality this way (you could just implement collision detection
-   * on the entities themselves within your app.js file).
+   * on the entities themselves within your app.js file). Then call render().
    */
   
   function update(dt) {
-    let winZone = (player.winnable) ? 'images/water-block.png' : 'images/Rock.png';
+    // draw rocks or water based on game state
+    let winZone = (player.winnable) ? 'images/water-block.png' : 'images/Rock.png'; 
     hordeCheck(); // add enemies if necessary
     updateEntities(dt);
     render(winZone);
   }
   
-  // if there are less than 3 enemies in allEnemies, add 1
+  // if there are less than 3 entities in allEnemies, add 1
   function hordeCheck() {
     let gate = (player.winnable) ? 9 : 3;
+    // determine if Gem or Enemy is created
     if (allEnemies.length < 3) {
       if ((Math.floor((Math.random() * 7) + 1)) == gate) {
         allEnemies.push(new Gem());
@@ -118,7 +120,8 @@ var Engine = (function(global) {
     player.update();        
     allEnemies.forEach(function(enemy) {
       enemy.update(dt);
-      // check for collisions each update; if player collides with enemy, draw deadboy sprite and reset
+      // check for collisions each update; if player collides with Enemy, draw deadboy sprite and reset
+      // if player collides with Gem, change game to winnable state
       if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
         if ((enemy.isGem)) {
           allEnemies.splice((allEnemies.indexOf(enemy)),1);
@@ -146,7 +149,7 @@ var Engine = (function(global) {
      */
     
     var rowImages = [
-      wZ,   // Top row is water
+      wZ,                         // Top row is rock or water, depending on game state
       'images/stone-block.png',   // Row 1 of 3 of stone
       'images/stone-block.png',   // Row 2 of 3 of stone
       'images/stone-block.png',   // Row 3 of 3 of stone

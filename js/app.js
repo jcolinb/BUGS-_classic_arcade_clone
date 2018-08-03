@@ -57,7 +57,7 @@ const Gem = function () {
   this.isGem = true;
 };
 
-Gem.prototype = Enemy.prototype;
+Gem.prototype = Enemy.prototype; // inherit methods from Enemy
 
 // Now write your own player class
 // This class requires an update(), render() and
@@ -101,7 +101,7 @@ Player.prototype.handleInput = function (move) {
         this.row -= 1;
       }
       else { // win condition; if player reaches top, make sprite a princess, then reset game after a pause
-        if (this.winnable) {
+        if (this.winnable) { // check if game is in winnable state; if true, initiate win
           this.win = true;
           this.nextMove = [this.x,-11];
           this.row -= 1;
@@ -109,7 +109,7 @@ Player.prototype.handleInput = function (move) {
           setTimeout(reset,2000);
         }
         else {
-          this.nextMove = [this.x,this.y];
+          this.nextMove = [this.x,this.y]; // else block move
         }
       }
       break;
@@ -137,7 +137,7 @@ const allEnemies = [];
 var player = new Player();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-function mover (e,b=true) {
+function mover (e) {
   var allowedKeys = {
     37: 'left',
     38: 'up',
@@ -145,9 +145,7 @@ function mover (e,b=true) {
     40: 'down'
   };
   player.handleInput(allowedKeys[e.keyCode]);
-  if (b) {
     setTimeout(listen,150); // issue new promise to listen for next key press after pause for animation
-  }
 }
 
 // promise-ize event listener to control speed of key input
