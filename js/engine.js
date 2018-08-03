@@ -95,8 +95,9 @@ var Engine = (function(global) {
   
   // if there are less than 3 enemies in allEnemies, add 1
   function hordeCheck() {
+    let gate = (player.winnable) ? 9 : 3;
     if (allEnemies.length < 3) {
-      if ((Math.floor((Math.random() * 7) + 1)) == 3) {
+      if ((Math.floor((Math.random() * 7) + 1)) == gate) {
         allEnemies.push(new Gem());
       }
       else {
