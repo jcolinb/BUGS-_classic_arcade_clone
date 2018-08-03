@@ -51,7 +51,7 @@ var Engine = (function(global) {
      */
     
     update(dt);
-    render();
+
 
     /* Set our lastTime variable which is used to determine the time delta
      * for the next time this function is called.
@@ -87,14 +87,16 @@ var Engine = (function(global) {
    */
   
   function update(dt) {
+    let winZone = (player.winnable) ? 'images/water-block.png' : 'images/Rock.png';
     hordeCheck(); // add enemies if necessary
     updateEntities(dt);
+    render(winZone);
   }
   
   // if there are less than 3 enemies in allEnemies, add 1
   function hordeCheck() {
     if (allEnemies.length < 3) {
-      if ((Math.floor((Math.random() * 3)) % 2) == 0) {
+      if ((Math.floor((Math.random() * 7) + 1)) == 3) {
         allEnemies.push(new Gem());
       }
       else {
@@ -117,8 +119,13 @@ var Engine = (function(global) {
       enemy.update(dt);
       // check for collisions each update; if player collides with enemy, draw deadboy sprite and reset
       if ((player.row == enemy.row) && ((player.col == enemy.col[0]) || (player.col == enemy.col[1]))) {
-        player.sprite = 'images/deadboy.png';
-        win.setTimeout(reset,150);
+        if ((enemy.isGem)) {
+          player.winnable = true;
+        }
+        else {
+          player.sprite = 'images/deadboy.png';
+          win.setTimeout(reset,150);
+        }
       }
     });
   }
@@ -130,14 +137,14 @@ var Engine = (function(global) {
    * they are just drawing the entire screen over and over.
    */
   
-  function render() {
+  function render(wZ) {
     
     /* This array holds the relative URL to the image used
      * for that particular row of the game level.
      */
     
     var rowImages = [
-      'images/Rock.png',   // Top row is water
+      wZ,   // Top row is water
       'images/stone-block.png',   // Row 1 of 3 of stone
       'images/stone-block.png',   // Row 2 of 3 of stone
       'images/stone-block.png',   // Row 3 of 3 of stone

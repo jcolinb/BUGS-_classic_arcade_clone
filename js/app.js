@@ -72,6 +72,7 @@ const Player = function () {
   this.row = 5;
   this.col = 2;
   this.win = false;
+  this.winnable = false;
 };
 
 // update player position
@@ -100,11 +101,16 @@ Player.prototype.handleInput = function (move) {
         this.row -= 1;
       }
       else { // win condition; if player reaches top, make sprite a princess, then reset game after a pause
-        this.win = true;
-        this.nextMove = [this.x,-11];
-        this.row -= 1;
-        this.sprite = 'images/char-princess-girl.png';
-        setTimeout(reset,2000);
+        if (this.winnable) {
+          this.win = true;
+          this.nextMove = [this.x,-11];
+          this.row -= 1;
+          this.sprite = 'images/char-princess-girl.png';
+          setTimeout(reset,2000);
+        }
+        else {
+          this.nextMove = [this.x,this.y];
+        }
       }
       break;
     case 'right':
