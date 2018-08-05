@@ -31,7 +31,7 @@ var Engine = (function(global) {
   doc.body.appendChild(canvas);
   
   /* This function serves as the kickoff point for the game loop itself
-   * and handles properly calling the update and render methods.
+   * and handles properly calling the update method.
    */
 
   function main() {
@@ -91,12 +91,12 @@ var Engine = (function(global) {
     let winZone = (player.winnable) ? 'images/water-block.png' : 'images/Rock.png'; 
     hordeCheck(); // add enemies if necessary
     updateEntities(dt);
-    render(winZone);
+    render(winZone); // pass image name for top row based on game state
   }
   
   // if there are less than 3 entities in allEnemies, add 1
   function hordeCheck() {
-    let gate = (player.winnable) ? 9 : 3;
+    let gate = (player.winnable) ? 9 : 3; // moves probability of Gem out of range once one is collected
     // determine if Gem or Enemy is created
     if (allEnemies.length < 3) {
       if ((Math.floor((Math.random() * 7) + 1)) == gate) {

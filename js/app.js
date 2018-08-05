@@ -145,7 +145,7 @@ function mover (e) {
     40: 'down'
   };
   player.handleInput(allowedKeys[e.keyCode]);
-    setTimeout(listen,150); // issue new promise to listen for next key press after pause for animation
+    setTimeout(listen,125); // issue new promise to listen for next key press after pause for animation
 }
 
 // promise-ize event listener to control speed of key input
