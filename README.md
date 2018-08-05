@@ -20,4 +20,5 @@ This game requires the following to run:
 
 + **app.js** for object definitions
 + **engine.js** for animation and game control
-+ **/images** for game assets
++ **resources.js** for resource cache management
++ **images/** for game assets
