@@ -22,3 +22,10 @@ This game requires the following to run:
 + **engine.js** for animation and game control
 + **resources.js** for resource cache management
 + **images/** for game assets
+
+#### to run game locally
+
+1. clone this repository
+2. open index.html in your favorite browser
+
+That's it!
